@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://b63yhpd4o5fm7"]
 
+[ext_resource type="Script" uid="uid://v6pvab2ka3w7" path="res://otter.gd" id="1_ibtfi"]
 [ext_resource type="Texture2D" uid="uid://wc60vgcf7vx0" path="res://pictures/walking_otter.png" id="1_w7ecu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ibtfi"]
@@ -39,11 +40,14 @@ animations = [{
 }]
 
 [node name="Otter" type="Node2D" unique_id=1949817010]
+script = ExtResource("1_ibtfi")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1234544591]
+position = Vector2(200, 200)
 scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_u0ya7")
 animation = &"walk"
-frame = 3
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=242900071]
+[node name="Area2D" type="Area2D" parent="." unique_id=1645086830]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1289501632]
