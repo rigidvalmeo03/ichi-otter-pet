@@ -2,6 +2,18 @@
 
 [ext_resource type="Script" uid="uid://v6pvab2ka3w7" path="res://otter.gd" id="1_ibtfi"]
 [ext_resource type="Texture2D" uid="uid://wc60vgcf7vx0" path="res://pictures/walking_otter.png" id="1_w7ecu"]
+[ext_resource type="Texture2D" uid="uid://ehn6htyfk4t6" path="res://pictures/idle_otter.png" id="2_qlm8l"]
+[ext_resource type="Texture2D" uid="uid://cd5t14u2l4m0x" path="res://pictures/blue_pebble.png" id="3_q64fn"]
+[ext_resource type="Script" uid="uid://c2uu1ro28hgc0" path="res://blue_pebble.gd" id="4_n5qbl"]
+[ext_resource type="Texture2D" uid="uid://32rerifj61rb" path="res://pictures/blue_pen.png" id="5_dkflp"]
+[ext_resource type="Script" uid="uid://d2ybmewgeqc13" path="res://blue_pen.gd" id="6_lp5g6"]
+[ext_resource type="Script" uid="uid://sug5nq3t1x8p" path="res://ladybug.gd" id="7_lp5g6"]
+[ext_resource type="Texture2D" uid="uid://de0y6xi0np4ae" path="res://pictures/ladybug.png" id="7_rlmxa"]
+[ext_resource type="Script" uid="uid://myxmti3ob8kk" path="res://blue_gem.gd" id="9_5p7x7"]
+[ext_resource type="Texture2D" uid="uid://brhqhwvq4jjnr" path="res://pictures/blue_gem.png" id="9_kkmj4"]
+[ext_resource type="Script" uid="uid://d7erqdpnrlsr" path="res://coin_manager.gd" id="12_fwv6n"]
+[ext_resource type="Texture2D" uid="uid://bidf37nh5744e" path="res://pictures/fish_treat.png" id="14_qlm8l"]
+[ext_resource type="Script" uid="uid://w0q7v2i3qlgf" path="res://fish_treat.gd" id="14_yb7gp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ibtfi"]
 atlas = ExtResource("1_w7ecu")
@@ -23,6 +35,14 @@ region = Rect2(0, 0, 768, 768)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("2_qlm8l")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_ibtfi")
 }, {
 "duration": 1.0,
@@ -39,15 +59,96 @@ animations = [{
 "speed": 6.0
 }]
 
-[node name="Otter" type="Node2D" unique_id=1949817010]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dtglo"]
+size = Vector2(127.75, 182.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u0ya7"]
+size = Vector2(180, 86.81673)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wt34f"]
+size = Vector2(193.33333, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tt7sx"]
+size = Vector2(153.33336, 116.66667)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kkmj4"]
+size = Vector2(175.00003, 140.00003)
+
+[node name="Main" type="Node2D" unique_id=776845025]
+
+[node name="Otter" type="Node2D" parent="." unique_id=1949817010]
 script = ExtResource("1_ibtfi")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1234544591]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Otter" unique_id=1234544591]
 position = Vector2(200, 200)
 scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_u0ya7")
-animation = &"walk"
+animation = &"idle"
 
-[node name="Area2D" type="Area2D" parent="." unique_id=1645086830]
+[node name="Area2D" type="Area2D" parent="Otter" unique_id=1645086830]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1289501632]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Otter/Area2D" unique_id=1289501632]
+position = Vector2(199.125, 199.75)
+shape = SubResource("RectangleShape2D_dtglo")
+
+[node name="CoinManager" type="Node" parent="." unique_id=903513409]
+script = ExtResource("12_fwv6n")
+
+[node name="BluePebble" type="Sprite2D" parent="." unique_id=42585947]
+position = Vector2(40, 32)
+scale = Vector2(0.3, 0.311)
+texture = ExtResource("3_q64fn")
+script = ExtResource("4_n5qbl")
+
+[node name="Area2D" type="Area2D" parent="BluePebble" unique_id=872303202]
+position = Vector2(-266.66666, 293.3333)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BluePebble/Area2D" unique_id=2111985252]
+position = Vector2(246.66666, -285.2947)
+shape = SubResource("RectangleShape2D_u0ya7")
+
+[node name="BluePen" type="Sprite2D" parent="." unique_id=2021294122]
+position = Vector2(46, 67)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("5_dkflp")
+script = ExtResource("6_lp5g6")
+
+[node name="Area2D" type="Area2D" parent="BluePen" unique_id=878069354]
+position = Vector2(-3.3333333, 13.333333)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BluePen/Area2D" unique_id=2016332543]
+position = Vector2(-33.333336, -10)
+shape = SubResource("RectangleShape2D_wt34f")
+
+[node name="Ladybug" type="Sprite2D" parent="." unique_id=792331776]
+position = Vector2(95, 30)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("7_rlmxa")
+script = ExtResource("7_lp5g6")
+
+[node name="Area2D" type="Area2D" parent="Ladybug" unique_id=1041071802]
+position = Vector2(-16.666666, 10)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ladybug/Area2D" unique_id=1681263028]
+position = Vector2(-6.666687, -5.0000076)
+shape = SubResource("RectangleShape2D_tt7sx")
+
+[node name="BlueGem" type="Sprite2D" parent="." unique_id=546851556]
+position = Vector2(89, 65)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("9_kkmj4")
+script = ExtResource("9_5p7x7")
+
+[node name="Area2D" type="Area2D" parent="BlueGem" unique_id=754393424]
+position = Vector2(-29.999996, 9.999999)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BlueGem/Area2D" unique_id=991839261]
+position = Vector2(7.5, 5)
+scale = Vector2(0.99999976, 0.99999976)
+shape = SubResource("RectangleShape2D_kkmj4")
+
+[node name="FishTreat" type="Sprite2D" parent="." unique_id=1313074151]
+position = Vector2(544, 309)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("14_qlm8l")
+script = ExtResource("14_yb7gp")
